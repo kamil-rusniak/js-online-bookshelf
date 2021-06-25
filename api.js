@@ -14,7 +14,7 @@ class ApiBook {
 
   async getBookTitle(title) {
     const response = await fetch(
-      `http://openlibrary.org/search.json?title=${title}`
+      `https://openlibrary.org/search.json?title=${title}`
     );
 
     const data = await response.json();
