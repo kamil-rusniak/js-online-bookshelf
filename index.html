@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    <title>Online Bookshelf</title>
+  </head>
+  <body>
+    <div class="book-details"></div>
+
+    <header>
+      <h1 class="title">Online <i class="fas fa-book orange"></i> Bookshelf</h1>
+    </header>
+    <nav class="nav">
+      <input
+        type="button"
+        value="Adding books"
+        class="change-button page-button adding-section-button active-btn"
+        id="adding-section"
+      />
+      <input
+        type="button"
+        value="My books"
+        class="change-button page-button book-section-button"
+        id="book-section"
+      />
+    </nav>
+    <p id="alert" class="invisible"></p>
+    <section class="main-section adding-section active-section">
+      <div class="input-wrapper">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" />
+      </div>
+
+      <div class="input-wrapper">
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" />
+      </div>
+
+      <div class="input-wrapper">
+        <label for="publisher">Publisher</label>
+        <input type="text" name="publisher" id="publisher" />
+      </div>
+
+      <div class="input-wrapper">
+        <label class="label" for="isbn">ISBN</label>
+        <div class="input-inner">
+          <input type="text" name="isbn" id="isbn" class="isbn" />
+          <i class="fas fa-search search-icon" id="search-icon"></i>
+        </div>
+        <p class="small-info">
+          You can enter info manually and click 'Add' or just type ISBN and
+          click search button
+        </p>
+      </div>
+
+      <input type="button" value="Add" class="page-button" id="add-button" />
+    </section>
+
+    <section class="main-section book-section">
+      <article class="book-segment to-read active-book-segment">
+        <h2 class="segment-button" id="to-read">To Read</h2>
+      </article>
+
+      <article class="book-segment reading">
+        <h2 class="segment-button" id="reading">Reading</h2>
+      </article>
+
+      <article class="book-segment finished">
+        <h2 class="segment-button" id="finished">Finished</h2>
+      </article>
+    </section>
+
+    <footer>
+      <a href="https://kamilrusniak.com">Made by Kamil Ruśniak</a>
+      <a href="https://openlibrary.org/">Using Open Library API</a>
+      <a href="https://undraw.co">Background image from undraw.co</a>
+      <a href="#">Data is stored in Local Storage</a>
+    </footer>
+
+    <script defer src="localstorage.js"></script>
+    <script defer src="ui.js"></script>
+    <script defer src="api.js"></script>
+    <script defer src="app.js"></script>
+  </body>
+</html>
