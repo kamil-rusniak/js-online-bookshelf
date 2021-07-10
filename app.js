@@ -41,13 +41,19 @@ document.getElementById("search-icon").addEventListener("click", function () {
   // 0-7475-5100-6
   const isbn = document.getElementById("isbn").value;
   const apiBook = new ApiBook(isbn);
-
+  // 9788380082205
   async function getAuthor(title) {
     return apiBook
       .getBookTitle(title)
       .then((result) => {
-        author = result.docs[0].author_name[0];
-        // console.log(author);
+        // deleting from LS uses title and author so if API doesnt return an author, an empty string is assigned so author isn't undefined and deleting/moving works
+        if (result.docs[0].hasOwnProperty("author_name") === true) {
+          author = result.docs[0].author_name[0];
+          // console.log(author);
+        } else {
+          console.log(result.docs);
+          author = "";
+        }
         return author;
       })
       .catch((err) => {
