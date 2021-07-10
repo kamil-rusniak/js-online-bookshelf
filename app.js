@@ -13,10 +13,11 @@ const alert = document.getElementById("alert");
 
 //Event Listener for add button
 document.getElementById("add-button").addEventListener("click", function () {
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
-  const publisher = document.getElementById("publisher").value;
-  const isbn = document.getElementById("isbn").value;
+  const title = document.getElementById("title").value.trim();
+  const author = document.getElementById("author").value.trim();
+  const publisher = document.getElementById("publisher").value.trim();
+  const isbn = document.getElementById("isbn").value.trim();
+
   const section = "to-read";
   const book = new Book(title, author, publisher, isbn, section);
 
@@ -37,7 +38,7 @@ document.getElementById("add-button").addEventListener("click", function () {
 
 // Event listener for isbn search button
 document.getElementById("search-icon").addEventListener("click", function () {
-  const isbn = document.getElementById("isbn").value;
+  const isbn = document.getElementById("isbn").value.trim();
   const apiBook = new ApiBook(isbn);
   async function getAuthor(title) {
     return apiBook
