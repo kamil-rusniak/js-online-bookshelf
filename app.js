@@ -37,11 +37,8 @@ document.getElementById("add-button").addEventListener("click", function () {
 
 // Event listener for isbn search button
 document.getElementById("search-icon").addEventListener("click", function () {
-  // API call
-  // 0-7475-5100-6
   const isbn = document.getElementById("isbn").value;
   const apiBook = new ApiBook(isbn);
-  // 9788380082205
   async function getAuthor(title) {
     return apiBook
       .getBookTitle(title)
@@ -52,7 +49,7 @@ document.getElementById("search-icon").addEventListener("click", function () {
           // console.log(author);
         } else {
           console.log(result.docs);
-          author = "";
+          author = "The API didn't provide an author";
         }
         return author;
       })
