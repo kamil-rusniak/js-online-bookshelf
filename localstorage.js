@@ -46,4 +46,34 @@ class Storage {
 
     localStorage.setItem("books", JSON.stringify(books));
   }
+
+  static editBookInLS(currentValue, newValue, title, author) {
+    const books = Storage.getBooksFromLS();
+
+    books.forEach(function (book) {
+      if (book.title === title && book.author === author) {
+        // console.log(currentValue);
+        if (currentValue === book.title) {
+          book.title = newValue;
+        } else if (currentValue === book.author) {
+          book.author = newValue;
+        } else if (currentValue === book.publisher) {
+          book.publisher = newValue;
+        } else if (currentValue === book.isbn) {
+          book.isbn = newValue;
+        }
+      }
+    });
+
+    localStorage.setItem("books", JSON.stringify(books));
+  }
+
+  
+  static setPage(newPage){ 
+     localStorage.setItem('currentPage', newPage)
+  }
+
+
+
+
 }
