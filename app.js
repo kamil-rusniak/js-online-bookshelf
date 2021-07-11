@@ -49,7 +49,7 @@ document.getElementById("search-icon").addEventListener("click", function () {
           author = result.docs[0].author_name[0];
           // console.log(author);
         } else {
-          console.log(result.docs);
+          // console.log(result.docs);
           author = "The API didn't provide an author";
         }
         return author;
@@ -98,6 +98,7 @@ document.getElementById("search-icon").addEventListener("click", function () {
   getBook(apiBook);
 });
 
+
 //Event listener to display Local Storage items in UI on when page is loaded
 document.addEventListener("DOMContentLoaded", Storage.displayBooks);
 
@@ -143,10 +144,10 @@ function bookDelete(e) {
 function bookInfo(e) {
   // showing windows with book details
   if (e.target.classList.contains("book-info-button")) {
-    const title =
+    let title =
       e.target.parentElement.previousElementSibling.children[1].children[0]
         .textContent;
-    const author =
+    let author =
       e.target.parentElement.previousElementSibling.children[1].children[1]
         .textContent;
     const publisher =
@@ -158,7 +159,7 @@ function bookInfo(e) {
 
     const bookDetails = document.querySelector(".book-details");
     const bookDetailsContent = document.createElement("div");
-    bookDetailsContent.classList.add = "book-details-content";
+    // bookDetailsContent.classList.add = "book-details-content";
 
     bookDetailsContent.innerHTML = `<div class="book-details-content">
         <span class="book-details-close">&times;</span>
@@ -166,26 +167,35 @@ function bookInfo(e) {
           <div class="book-details-text-inner">
             <div class="book-details-header-text">
             <h2>Title</h2>
+            <i class="far fa-edit details-edit"></i>
           </div>
-          <p>${title}</p>
+         
+          <input type="text" class="book-details-input"  id="book-details-title" value="${title}">
+          <i class="far fa-check-circle edit-confirm"></i>
           </div>
           <div class="book-details-text-inner">
             <div class="book-details-header-text">
               <h2>Author</h2>
+              <i class="far fa-edit details-edit"></i>
             </div>
-            <p>${author}</p>
+            <input type="text" class="book-details-input"  id="book-details-author" value="${author}">
+            <i class="far fa-check-circle edit-confirm"></i>
             </div>
           <div class="book-details-text-inner">
             <div class="book-details-header-text">
               <h2>Publisher</h2>
+              <i class="far fa-edit details-edit"></i>
             </div>
-            <p>${publisher}</p>
+            <input type="text" class="book-details-input"  id="book-details-publisher" value="${publisher}">
+            <i class="far fa-check-circle edit-confirm"></i>
             </div>
           <div class="book-details-text-inner">
             <div class="book-details-header-text">
               <h2>ISBN</h2>
+              <i class="far fa-edit details-edit"></i>
             </div>
-            <p>${isbn}</p>
+            <input type="text" class="book-details-input"  id="book-details-isbn" value="${isbn}">
+            <i class="far fa-check-circle edit-confirm"></i>
             </div>
         </div>
         <img src="http://covers.openlibrary.org/b/isbn/${isbn}-L.jpg" alt="${title} Book Cover" />
@@ -213,6 +223,43 @@ function bookInfo(e) {
         bookDetailsContent.remove();
       }
     };
+
+    bookDetailsContent.addEventListener("click", function (e) {
+      if (e.target.classList.contains("details-edit")) {
+        let targetInput = e.target.parentElement.nextElementSibling;
+        let currentValue = e.target.parentElement.nextElementSibling.value;
+        let editConfirm =
+          e.target.parentElement.nextElementSibling.nextElementSibling;
+
+        let editableTitle = document.getElementById("book-details-title").value;
+        let editableAuthor = document.getElementById(
+          "book-details-author"
+        ).value;
+        // let editablePublisher = document.getElementById("book-details-publisher").value;
+        // let editableIsbn = document.getElementById("book-details-isbn").value;
+
+        targetInput.readOnly = false;
+        targetInput.focus();
+        editConfirm.style.display = "inline";
+        // console.log(currentValue);
+
+        editConfirm.addEventListener("click", function (e) {
+          let newValue = e.target.previousElementSibling.value;
+          console.log(newValue);
+
+          Storage.editBookInLS(
+            currentValue,
+            newValue,
+            editableTitle,
+            editableAuthor
+          );
+          targetInput.readOnly = true;
+          editConfirm.style.display = "none";
+          location.reload();
+          return false;
+        });
+      }
+    });
   }
 }
 
@@ -236,24 +283,44 @@ document.querySelector(".finished").addEventListener("click", function (e) {
   bookInfo(e);
 });
 
-// Event listeners for edit button in book info window
-document
-  .querySelector(".book-details")
-  .addEventListener("click", function (e) {});
-
 /////////////// SWITCHING SECTIONS AND CSS STUFF ////////////
 
-const sectionButtons = document.querySelectorAll(".change-button");
+const addingPageButton = document.querySelector(".adding-page-button");
+const bookPageButton = document.querySelector(".book-page-button");
 const segmentButtons = document.querySelectorAll(".segment-button");
-sectionButtons.forEach((item) => item.addEventListener("click", changeTab));
+
+if (localStorage.getItem("currentPage") == null) {
+  Storage.setPage("adding-page");
+}
+
+addingPageButton.addEventListener("click", function () {
+  Storage.setPage("adding-page");
+  changePage();
+});
+
+bookPageButton.addEventListener("click", function () {
+  Storage.setPage("book-page");
+  changePage();
+});
+
+
+document.addEventListener("DOMContentLoaded", function(){
+  const currentPage = document.querySelector(`.${localStorage.getItem("currentPage")}`);
+  const currentButton = document.querySelector(`#${localStorage.getItem("currentPage")}`);
+
+  currentButton.classList.toggle("active-btn");
+  currentPage.classList.toggle("active-page");
+});
+
 segmentButtons.forEach((item) => item.addEventListener("click", changeSegment));
 
-function changeTab() {
-  resetSections();
-  const currentButton = document.querySelector(`#${this.id}`);
-  const currentSection = document.querySelector(`.${this.id}`);
+function changePage() {
+  resetPages();
+  const currentPage = document.querySelector(`.${localStorage.getItem("currentPage")}`);
+  const currentButton = document.querySelector(`#${localStorage.getItem("currentPage")}`);
+
   currentButton.classList.toggle("active-btn");
-  currentSection.classList.toggle("active-section");
+  currentPage.classList.toggle("active-page");
 }
 
 function changeSegment() {
@@ -267,8 +334,9 @@ function resetSegments() {
   segments.forEach((item) => item.classList.remove("active-book-segment"));
 }
 
-function resetSections() {
-  const sections = document.querySelectorAll(".main-section");
-  sections.forEach((item) => item.classList.remove("active-section"));
-  sectionButtons.forEach((item) => item.classList.remove("active-btn"));
+function resetPages() {
+  const pages = document.querySelectorAll(".main-page");
+  pages.forEach((item) => item.classList.remove("active-page"));
+  addingPageButton.classList.remove("active-btn");
+  bookPageButton.classList.remove("active-btn");
 }
