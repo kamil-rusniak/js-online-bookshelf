@@ -1,9 +1,10 @@
 class UI {
-    static addBookToList(book, section) {
-      const bookList = document.querySelector(section);
-      const bookItem = document.createElement("div");
-  
-      bookItem.innerHTML = `
+
+  static addBookToList(book, section) {
+    const bookList = document.querySelector(section);
+    const bookItem = document.createElement("div");
+
+    bookItem.innerHTML = `
     <div class="book-element">
       <div class="book-inner">
         <i class="far fa-dot-circle"></i>
@@ -22,21 +23,21 @@ class UI {
       </div>
     </div>
     `;
-  
-      bookList.appendChild(bookItem);
-    }
-  
-    static deleteBook(deleteButton) {
-      if (deleteButton.classList.contains("book-delete-button")) {
-        // accessing whole book element - parent of parent of delete button
-        deleteButton.parentElement.parentElement.remove();
-      }
-    }
-  
-    static clearFields() {
-      document.getElementById("title").value = "";
-      document.getElementById("author").value = "";
-      document.getElementById("publisher").value = "";
-      document.getElementById("isbn").value = "";
+
+    bookList.appendChild(bookItem);
+  }
+
+  static deleteBook(deleteButton) {
+    if (deleteButton.classList.contains("book-delete-button")) {
+      // accessing whole book element - parent of parent of delete button
+      deleteButton.parentElement.parentElement.remove();
     }
   }
+
+  static clearFields() {
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("publisher").value = "";
+    document.getElementById("isbn").value = "";
+  }
+}
