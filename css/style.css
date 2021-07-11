@@ -65,13 +65,13 @@ nav {
   background-color: #fff;
 }
 
-.adding-section-button {
+.adding-page-button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: 0;
 }
 
-.book-section-button {
+.book-page-button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -80,26 +80,26 @@ nav {
   background-color: #ff9463;
 }
 
-.main-section {
+.main-page {
   display: none;
   animation: tabSwitch 500ms;
 }
 
-.main-section.active-section {
+.main-page.active-page {
   display: block;
 }
 
-.adding-section {
+.adding-page {
   font-size: 2rem;
   text-align: left;
   width: 60%;
 }
 
-.adding-section .input-wrapper {
+.adding-page .input-wrapper {
   margin-top: 2rem;
 }
 
-.adding-section .input-wrapper input {
+.adding-page .input-wrapper input {
   width: 100%;
   padding: 1rem;
   border: 1px solid black;
@@ -108,18 +108,18 @@ nav {
   display: block;
 }
 
-.adding-section .input-wrapper .input-inner {
+.adding-page .input-wrapper .input-inner {
   display: flex;
   align-items: center;
 }
 
-.adding-section .input-wrapper .isbn {
+.adding-page .input-wrapper .isbn {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: 0;
 }
 
-.adding-section .input-wrapper .search-icon {
+.adding-page .input-wrapper .search-icon {
   background-color: #3f3d56;
   color: #fff;
   cursor: pointer;
@@ -143,11 +143,11 @@ nav {
   display: none;
 }
 
-.book-section {
+.book-page {
   margin-top: 3rem;
 }
 
-.book-section.active-section {
+.book-page.active-page {
   width: 75%;
   display: flex;
   flex-direction: row;
@@ -264,8 +264,12 @@ nav {
   font-size: 1.8rem;
 }
 
-.book-details-text p {
-  font-size: 1.3rem;
+.book-details-text input {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.1rem;
+  width: 90%;
 }
 
 .book-details-text i {
@@ -305,6 +309,10 @@ nav {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.book-details .edit-confirm {
+  display: none;
 }
 
 .small-info {
@@ -352,7 +360,7 @@ footer a {
 }
 
 @media (max-width: 1200px) {
-  .book-section.active-section {
+  .book-page.active-page {
     width: 100%;
     flex-direction: column;
   }
@@ -454,14 +462,14 @@ footer a {
 }
 
 @media (max-width: 500px) {
-  .main-section {
+  .main-page {
     margin-bottom: 4rem;
   }
   .page-button {
     font-size: 1.1rem;
     padding: 0.5rem 1.8rem;
   }
-  .adding-section .input-wrapper input {
+  .adding-page .input-wrapper input {
     width: 100%;
     padding: 0.7rem;
     border: 1px solid black;
@@ -469,7 +477,7 @@ footer a {
     font-size: 1rem;
     display: block;
   }
-  .adding-section .input-wrapper .search-icon {
+  .adding-page .input-wrapper .search-icon {
     padding: 0.24rem;
   }
 }
