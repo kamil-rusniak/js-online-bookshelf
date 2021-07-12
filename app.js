@@ -18,7 +18,7 @@ document.getElementById("add-button").addEventListener("click", function () {
   const publisher = document.getElementById("publisher").value.trim();
   const isbn = document.getElementById("isbn").value.trim();
 
-  const section = "to-read";
+  const section = "to-read-list";
   const book = new Book(title, author, publisher, isbn, section);
 
   // Validation
@@ -31,7 +31,7 @@ document.getElementById("add-button").addEventListener("click", function () {
   } else {
     alert.classList.add("invisible");
     UI.clearFields();
-    UI.addBookToList(book, ".to-read");
+    UI.addBookToList(book, ".to-read-list");
     Storage.addBookToLS(book);
   }
 });
@@ -82,7 +82,7 @@ document.getElementById("search-icon").addEventListener("click", function () {
     // console.log(author);
     const publisher = bookObject.publishers[0];
     const isbn = bookObject.isbn_13[0];
-    const section = "to-read";
+    const section = "to-read-list";
 
     const book = new Book(title, author, publisher, isbn, section);
 
@@ -91,7 +91,7 @@ document.getElementById("search-icon").addEventListener("click", function () {
 
     alert.classList.add("invisible");
     UI.clearFields();
-    UI.addBookToList(book, ".to-read");
+    UI.addBookToList(book, ".to-read-list");
     Storage.addBookToLS(book);
   }
 
@@ -264,21 +264,21 @@ function bookInfo(e) {
 }
 
 // Event listeners for book buttons in different reading sections
-document.querySelector(".to-read").addEventListener("mouseup", function (e) {
-  bookSwitch(e, "switch-right-button", "reading"); // switching book from 'to-read' to 'reading'
+document.querySelector(".to-read-list").addEventListener("mouseup", function (e) {
+  bookSwitch(e, "switch-right-button", "reading-list"); // switching book from 'to-read' to 'reading'
   bookDelete(e);
   bookInfo(e);
 });
 
-document.querySelector(".reading").addEventListener("click", function (e) {
-  bookSwitch(e, "switch-left-button", "to-read"); // switching book from 'reading' to 'to-read'
-  bookSwitch(e, "switch-right-button", "finished"); // switching book from 'reading' to 'finished'
+document.querySelector(".reading-list").addEventListener("click", function (e) {
+  bookSwitch(e, "switch-left-button", "to-read-list"); // switching book from 'reading' to 'to-read'
+  bookSwitch(e, "switch-right-button", "finished-list"); // switching book from 'reading' to 'finished'
   bookDelete(e);
   bookInfo(e);
 });
 
-document.querySelector(".finished").addEventListener("click", function (e) {
-  bookSwitch(e, "switch-left-button", "reading"); // switching book from 'finished' to 'reading'
+document.querySelector(".finished-list").addEventListener("click", function (e) {
+  bookSwitch(e, "switch-left-button", "reading-list"); // switching book from 'finished' to 'reading'
   bookDelete(e);
   bookInfo(e);
 });

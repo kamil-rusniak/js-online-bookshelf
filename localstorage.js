@@ -17,12 +17,12 @@ class Storage {
       let book = books[i];
       // console.log(books[i]);
       // console.log(i);
-      if (books[i].section === "to-read") {
-        UI.addBookToList(book, ".to-read");
-      } else if (books[i].section === "reading") {
-        UI.addBookToList(book, ".reading");
-      } else if (books[i].section === "finished") {
-        UI.addBookToList(book, ".finished");
+      if (books[i].section === "to-read-list") {
+        UI.addBookToList(book, ".to-read-list");
+      } else if (books[i].section === "reading-list") {
+        UI.addBookToList(book, ".reading-list");
+      } else if (books[i].section === "finished-list") {
+        UI.addBookToList(book, ".finished-list");
       }
     }
   }
