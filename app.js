@@ -340,3 +340,4 @@ function resetPages() {
   addingPageButton.classList.remove("active-btn");
   bookPageButton.classList.remove("active-btn");
 }
+

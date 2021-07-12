@@ -6,7 +6,6 @@ class Storage {
     } else {
       books = JSON.parse(localStorage.getItem("books"));
     }
-
     return books;
   }
 
@@ -72,8 +71,4 @@ class Storage {
   static setPage(newPage){ 
      localStorage.setItem('currentPage', newPage)
   }
-
-
-
-
 }
