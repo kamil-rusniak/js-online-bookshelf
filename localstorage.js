@@ -1,10 +1,10 @@
 class Storage {
   static getBooksFromLS() {
     let books;
-    if (localStorage.getItem("books") === null) {
+    if (localStorage.getItem('books') === null) {
       books = [];
     } else {
-      books = JSON.parse(localStorage.getItem("books"));
+      books = JSON.parse(localStorage.getItem('books'));
     }
     return books;
   }
@@ -14,14 +14,12 @@ class Storage {
 
     for (let i = 0; i < books.length; i++) {
       let book = books[i];
-      // console.log(books[i]);
-      // console.log(i);
-      if (books[i].section === "to-read-list") {
-        UI.addBookToList(book, ".to-read-list");
-      } else if (books[i].section === "reading-list") {
-        UI.addBookToList(book, ".reading-list");
-      } else if (books[i].section === "finished-list") {
-        UI.addBookToList(book, ".finished-list");
+      if (books[i].section === 'to-read-list') {
+        UI.addBookToList(book, '.to-read-list');
+      } else if (books[i].section === 'reading-list') {
+        UI.addBookToList(book, '.reading-list');
+      } else if (books[i].section === 'finished-list') {
+        UI.addBookToList(book, '.finished-list');
       }
     }
   }
@@ -31,7 +29,7 @@ class Storage {
 
     books.push(book);
 
-    localStorage.setItem("books", JSON.stringify(books));
+    localStorage.setItem('books', JSON.stringify(books));
   }
 
   static removeBookFromLS(title, author) {
@@ -43,7 +41,7 @@ class Storage {
       }
     });
 
-    localStorage.setItem("books", JSON.stringify(books));
+    localStorage.setItem('books', JSON.stringify(books));
   }
 
   static editBookInLS(currentValue, newValue, title, author) {
@@ -64,11 +62,10 @@ class Storage {
       }
     });
 
-    localStorage.setItem("books", JSON.stringify(books));
+    localStorage.setItem('books', JSON.stringify(books));
   }
 
-  
-  static setPage(newPage){ 
-     localStorage.setItem('currentPage', newPage)
+  static setPage(newPage) {
+    localStorage.setItem('currentPage', newPage);
   }
 }

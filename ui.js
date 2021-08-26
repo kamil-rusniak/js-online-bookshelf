@@ -1,8 +1,7 @@
 class UI {
-
   static addBookToList(book, section) {
     const bookList = document.querySelector(section);
-    const bookItem = document.createElement("div");
+    const bookItem = document.createElement('div');
 
     bookItem.innerHTML = `
     <div class="book-element">
@@ -28,16 +27,16 @@ class UI {
   }
 
   static deleteBook(deleteButton) {
-    if (deleteButton.classList.contains("book-delete-button")) {
+    if (deleteButton.classList.contains('book-delete-button')) {
       // accessing whole book element - parent of parent of delete button
       deleteButton.parentElement.parentElement.remove();
     }
   }
 
   static clearFields() {
-    document.getElementById("title").value = "";
-    document.getElementById("author").value = "";
-    document.getElementById("publisher").value = "";
-    document.getElementById("isbn").value = "";
+    document.getElementById('title').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('publisher').value = '';
+    document.getElementById('isbn').value = '';
   }
 }

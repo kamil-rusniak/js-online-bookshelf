@@ -9,47 +9,45 @@ class Book {
   }
 }
 
-const alert = document.getElementById("alert");
+const alert = document.getElementById('alert');
 
 //Event Listener for add button
-document.getElementById("add-button").addEventListener("click", function () {
-  const title = document.getElementById("title").value.trim();
-  const author = document.getElementById("author").value.trim();
-  const publisher = document.getElementById("publisher").value.trim();
-  const isbn = document.getElementById("isbn").value.trim();
+document.getElementById('add-button').addEventListener('click', function () {
+  const title = document.getElementById('title').value.trim();
+  const author = document.getElementById('author').value.trim();
+  const publisher = document.getElementById('publisher').value.trim();
+  const isbn = document.getElementById('isbn').value.trim();
 
-  const section = "to-read-list";
+  const section = 'to-read-list';
   const book = new Book(title, author, publisher, isbn, section);
 
   // Validation
-  if (title === "" || author === "") {
+  if (title === '' || author === '') {
     alert.innerText = "Title and Author fields can't be empty";
-    alert.classList.remove("invisible");
+    alert.classList.remove('invisible');
     setTimeout(function () {
-      alert.classList.add("invisible");
+      alert.classList.add('invisible');
     }, 5000);
   } else {
-    alert.classList.add("invisible");
+    alert.classList.add('invisible');
     UI.clearFields();
-    UI.addBookToList(book, ".to-read-list");
+    UI.addBookToList(book, '.to-read-list');
     Storage.addBookToLS(book);
   }
 });
 
 // Event listener for isbn search button
-document.getElementById("search-icon").addEventListener("click", function () {
-  const isbn = document.getElementById("isbn").value.trim();
+document.getElementById('search-icon').addEventListener('click', function () {
+  const isbn = document.getElementById('isbn').value.trim();
   const apiBook = new ApiBook(isbn);
   async function getAuthor(title) {
     return apiBook
       .getBookTitle(title)
       .then((result) => {
         // deleting from LS uses title and author so if API doesnt return an author, an empty string is assigned so author isn't undefined and deleting/moving works
-        if (result.docs[0].hasOwnProperty("author_name") === true) {
+        if (result.docs[0].hasOwnProperty('author_name') === true) {
           author = result.docs[0].author_name[0];
-          // console.log(author);
         } else {
-          // console.log(result.docs);
           author = "The API didn't provide an author";
         }
         return author;
@@ -58,20 +56,19 @@ document.getElementById("search-icon").addEventListener("click", function () {
         console.log(err);
       });
   }
-  // 9780747532699
+
   async function getBook(book) {
     book
       .getJsonBook(book)
       .then((bookObject) => {
-        // console.log(bookObject);
         makeBook(bookObject);
       })
       .catch((err) => {
         console.log(err);
-        alert.innerText = "Please enter a valid ISBN number";
-        alert.classList.remove("invisible");
+        alert.innerText = 'Please enter a valid ISBN number';
+        alert.classList.remove('invisible');
         setTimeout(function () {
-          alert.classList.add("invisible");
+          alert.classList.add('invisible');
         }, 5000);
       });
   }
@@ -79,28 +76,23 @@ document.getElementById("search-icon").addEventListener("click", function () {
   async function makeBook(bookObject) {
     const title = bookObject.title;
     const author = await getAuthor(title);
-    // console.log(author);
     const publisher = bookObject.publishers[0];
     const isbn = bookObject.isbn_13[0];
-    const section = "to-read-list";
+    const section = 'to-read-list';
 
     const book = new Book(title, author, publisher, isbn, section);
 
-    // console.log(author);
-    // console.log(book);
-
-    alert.classList.add("invisible");
+    alert.classList.add('invisible');
     UI.clearFields();
-    UI.addBookToList(book, ".to-read-list");
+    UI.addBookToList(book, '.to-read-list');
     Storage.addBookToLS(book);
   }
 
   getBook(apiBook);
 });
 
-
 //Event listener to display Local Storage items in UI on when page is loaded
-document.addEventListener("DOMContentLoaded", Storage.displayBooks);
+document.addEventListener('DOMContentLoaded', Storage.displayBooks);
 
 function bookSwitch(e, direction, section) {
   // (it takes direction where to move the book and also section in Local Storage which is also class name in CSS)
@@ -118,7 +110,7 @@ function bookSwitch(e, direction, section) {
       if (books[i].title === title && books[i].author === author) {
         UI.addBookToList(book, `.${section}`);
         books[i].section = section;
-        localStorage.setItem("books", JSON.stringify(books));
+        localStorage.setItem('books', JSON.stringify(books));
         i++;
         e.target.parentElement.parentElement.remove();
       }
@@ -128,7 +120,7 @@ function bookSwitch(e, direction, section) {
 
 function bookDelete(e) {
   // in this case, delete button is target of the event(it happens when we click the button)
-  if (e.target.classList.contains("book-delete-button")) {
+  if (e.target.classList.contains('book-delete-button')) {
     const title =
       e.target.parentElement.previousElementSibling.children[1].children[0]
         .textContent;
@@ -143,7 +135,7 @@ function bookDelete(e) {
 
 function bookInfo(e) {
   // showing windows with book details
-  if (e.target.classList.contains("book-info-button")) {
+  if (e.target.classList.contains('book-info-button')) {
     let title =
       e.target.parentElement.previousElementSibling.children[1].children[0]
         .textContent;
@@ -157,9 +149,8 @@ function bookInfo(e) {
       e.target.parentElement.previousElementSibling.children[1].children[3]
         .textContent;
 
-    const bookDetails = document.querySelector(".book-details");
-    const bookDetailsContent = document.createElement("div");
-    // bookDetailsContent.classList.add = "book-details-content";
+    const bookDetails = document.querySelector('.book-details');
+    const bookDetailsContent = document.createElement('div');
 
     bookDetailsContent.innerHTML = `<div class="book-details-content">
         <span class="book-details-close">&times;</span>
@@ -203,47 +194,41 @@ function bookInfo(e) {
 
     bookDetails.appendChild(bookDetailsContent);
 
-    const bookDetailsInputs = document.querySelectorAll(".book-details-input");
+    const bookDetailsInputs = document.querySelectorAll('.book-details-input');
     bookDetailsInputs.forEach(function (input) {
       input.readOnly = true;
     });
 
-    // const bookDetailsTitle = document.getElementById("book-details-title");
-    // bookDetailsTitle.readOnly = true;
-
-    const detailsClose = document.querySelector(".book-details-close");
-    bookDetails.style.display = "block";
+    const detailsClose = document.querySelector('.book-details-close');
+    bookDetails.style.display = 'block';
     detailsClose.onclick = function () {
-      bookDetails.style.display = "none";
+      bookDetails.style.display = 'none';
       bookDetailsContent.remove();
     };
     window.onclick = function (event) {
       if (event.target === bookDetailsContent) {
-        bookDetails.style.display = "none";
+        bookDetails.style.display = 'none';
         bookDetailsContent.remove();
       }
     };
 
-    bookDetailsContent.addEventListener("click", function (e) {
-      if (e.target.classList.contains("details-edit")) {
+    bookDetailsContent.addEventListener('click', function (e) {
+      if (e.target.classList.contains('details-edit')) {
         let targetInput = e.target.parentElement.nextElementSibling;
         let currentValue = e.target.parentElement.nextElementSibling.value;
         let editConfirm =
           e.target.parentElement.nextElementSibling.nextElementSibling;
 
-        let editableTitle = document.getElementById("book-details-title").value;
+        let editableTitle = document.getElementById('book-details-title').value;
         let editableAuthor = document.getElementById(
-          "book-details-author"
+          'book-details-author'
         ).value;
-        // let editablePublisher = document.getElementById("book-details-publisher").value;
-        // let editableIsbn = document.getElementById("book-details-isbn").value;
 
         targetInput.readOnly = false;
         targetInput.focus();
-        editConfirm.style.display = "inline";
-        // console.log(currentValue);
+        editConfirm.style.display = 'inline';
 
-        editConfirm.addEventListener("click", function (e) {
+        editConfirm.addEventListener('click', function (e) {
           let newValue = e.target.previousElementSibling.value;
           console.log(newValue);
 
@@ -254,7 +239,7 @@ function bookInfo(e) {
             editableAuthor
           );
           targetInput.readOnly = true;
-          editConfirm.style.display = "none";
+          editConfirm.style.display = 'none';
           location.reload();
           return false;
         });
@@ -264,80 +249,90 @@ function bookInfo(e) {
 }
 
 // Event listeners for book buttons in different reading sections
-document.querySelector(".to-read-list").addEventListener("mouseup", function (e) {
-  bookSwitch(e, "switch-right-button", "reading-list"); // switching book from 'to-read' to 'reading'
+document
+  .querySelector('.to-read-list')
+  .addEventListener('mouseup', function (e) {
+    bookSwitch(e, 'switch-right-button', 'reading-list'); // switching book from 'to-read' to 'reading'
+    bookDelete(e);
+    bookInfo(e);
+  });
+
+document.querySelector('.reading-list').addEventListener('click', function (e) {
+  bookSwitch(e, 'switch-left-button', 'to-read-list'); // switching book from 'reading' to 'to-read'
+  bookSwitch(e, 'switch-right-button', 'finished-list'); // switching book from 'reading' to 'finished'
   bookDelete(e);
   bookInfo(e);
 });
 
-document.querySelector(".reading-list").addEventListener("click", function (e) {
-  bookSwitch(e, "switch-left-button", "to-read-list"); // switching book from 'reading' to 'to-read'
-  bookSwitch(e, "switch-right-button", "finished-list"); // switching book from 'reading' to 'finished'
-  bookDelete(e);
-  bookInfo(e);
-});
-
-document.querySelector(".finished-list").addEventListener("click", function (e) {
-  bookSwitch(e, "switch-left-button", "reading-list"); // switching book from 'finished' to 'reading'
-  bookDelete(e);
-  bookInfo(e);
-});
+document
+  .querySelector('.finished-list')
+  .addEventListener('click', function (e) {
+    bookSwitch(e, 'switch-left-button', 'reading-list'); // switching book from 'finished' to 'reading'
+    bookDelete(e);
+    bookInfo(e);
+  });
 
 /////////////// SWITCHING SECTIONS AND CSS STUFF ////////////
 
-const addingPageButton = document.querySelector(".adding-page-button");
-const bookPageButton = document.querySelector(".book-page-button");
-const segmentButtons = document.querySelectorAll(".segment-button");
+const addingPageButton = document.querySelector('.adding-page-button');
+const bookPageButton = document.querySelector('.book-page-button');
+const segmentButtons = document.querySelectorAll('.segment-button');
 
-if (localStorage.getItem("currentPage") == null) {
-  Storage.setPage("adding-page");
+if (localStorage.getItem('currentPage') == null) {
+  Storage.setPage('adding-page');
 }
 
-addingPageButton.addEventListener("click", function () {
-  Storage.setPage("adding-page");
+addingPageButton.addEventListener('click', function () {
+  Storage.setPage('adding-page');
   changePage();
 });
 
-bookPageButton.addEventListener("click", function () {
-  Storage.setPage("book-page");
+bookPageButton.addEventListener('click', function () {
+  Storage.setPage('book-page');
   changePage();
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  const currentPage = document.querySelector(
+    `.${localStorage.getItem('currentPage')}`
+  );
+  const currentButton = document.querySelector(
+    `#${localStorage.getItem('currentPage')}`
+  );
 
-document.addEventListener("DOMContentLoaded", function(){
-  const currentPage = document.querySelector(`.${localStorage.getItem("currentPage")}`);
-  const currentButton = document.querySelector(`#${localStorage.getItem("currentPage")}`);
-
-  currentButton.classList.toggle("active-btn");
-  currentPage.classList.toggle("active-page");
+  currentButton.classList.toggle('active-btn');
+  currentPage.classList.toggle('active-page');
 });
 
-segmentButtons.forEach((item) => item.addEventListener("click", changeSegment));
+segmentButtons.forEach((item) => item.addEventListener('click', changeSegment));
 
 function changePage() {
   resetPages();
-  const currentPage = document.querySelector(`.${localStorage.getItem("currentPage")}`);
-  const currentButton = document.querySelector(`#${localStorage.getItem("currentPage")}`);
+  const currentPage = document.querySelector(
+    `.${localStorage.getItem('currentPage')}`
+  );
+  const currentButton = document.querySelector(
+    `#${localStorage.getItem('currentPage')}`
+  );
 
-  currentButton.classList.toggle("active-btn");
-  currentPage.classList.toggle("active-page");
+  currentButton.classList.toggle('active-btn');
+  currentPage.classList.toggle('active-page');
 }
 
 function changeSegment() {
   resetSegments();
   const currentSegment = document.querySelector(`.${this.id}`);
-  currentSegment.classList.toggle("active-book-segment");
+  currentSegment.classList.toggle('active-book-segment');
 }
 
 function resetSegments() {
-  const segments = document.querySelectorAll(".book-segment");
-  segments.forEach((item) => item.classList.remove("active-book-segment"));
+  const segments = document.querySelectorAll('.book-segment');
+  segments.forEach((item) => item.classList.remove('active-book-segment'));
 }
 
 function resetPages() {
-  const pages = document.querySelectorAll(".main-page");
-  pages.forEach((item) => item.classList.remove("active-page"));
-  addingPageButton.classList.remove("active-btn");
-  bookPageButton.classList.remove("active-btn");
+  const pages = document.querySelectorAll('.main-page');
+  pages.forEach((item) => item.classList.remove('active-page'));
+  addingPageButton.classList.remove('active-btn');
+  bookPageButton.classList.remove('active-btn');
 }
-

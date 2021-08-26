@@ -21,4 +21,3 @@ class ApiBook {
     return data;
   }
 }
-
