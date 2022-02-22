@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mate+SC&family=Roboto:wght@100;300;400;500;700&display=swap");
 html {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: "Roboto", sans-serif;
 }
@@ -8,7 +9,8 @@ html {
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
   margin: 0;
   padding: 0;
 }
@@ -23,10 +25,19 @@ body {
   background-position: center bottom;
   background-size: 80%;
   background-attachment: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: 100%;
   min-height: 100%;
 }
@@ -45,13 +56,15 @@ body {
   font-size: 2rem;
 }
 
-.invisible {
+.hidden {
   display: none;
 }
 
 nav {
   margin-top: 5rem;
   margin-bottom: 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -82,7 +95,8 @@ nav {
 
 .main-page {
   display: none;
-  animation: tabSwitch 500ms;
+  -webkit-animation: tabSwitch 500ms;
+          animation: tabSwitch 500ms;
 }
 
 .main-page.active-page {
@@ -109,8 +123,12 @@ nav {
 }
 
 .adding-page .input-wrapper .input-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .adding-page .input-wrapper .isbn {
@@ -149,15 +167,21 @@ nav {
 
 .book-page.active-page {
   width: 75%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .book-segment {
   display: inline;
   width: 15%;
   margin: 0 3rem;
-  animation: deactivateSegment 300ms;
+  -webkit-animation: deactivateSegment 300ms;
+          animation: deactivateSegment 300ms;
 }
 
 .book-segment h2 {
@@ -174,8 +198,12 @@ nav {
 }
 
 .book-segment .book-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -183,7 +211,8 @@ nav {
 
 .book-segment.active-book-segment {
   width: 70%;
-  animation: activateSegment 300ms;
+  -webkit-animation: activateSegment 300ms;
+          animation: activateSegment 300ms;
 }
 
 .book-segment.active-book-segment .book-inner {
@@ -198,13 +227,21 @@ nav {
 }
 
 .book-segment.active-book-segment .book-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 .book-element {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding-top: 1.2rem;
 }
 
@@ -250,9 +287,15 @@ nav {
   padding: 3rem 2rem;
   border: 1px solid #888;
   width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: relative;
 }
 
@@ -287,9 +330,16 @@ nav {
 }
 
 .book-details-header-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .book-details img {
@@ -320,7 +370,9 @@ nav {
 }
 
 footer {
-  align-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
   text-align: center;
   position: absolute;
   bottom: 0;
@@ -332,6 +384,15 @@ footer a {
   margin: 0 1rem;
 }
 
+@-webkit-keyframes tabSwitch {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes tabSwitch {
   from {
     opacity: 0;
@@ -341,12 +402,30 @@ footer a {
   }
 }
 
+@-webkit-keyframes activateSegment {
+  from {
+    width: 15%;
+  }
+  to {
+    width: 70%;
+  }
+}
+
 @keyframes activateSegment {
   from {
     width: 15%;
   }
   to {
     width: 70%;
+  }
+}
+
+@-webkit-keyframes deactivateSegment {
+  from {
+    width: 70%;
+  }
+  to {
+    width: 15%;
   }
 }
 
@@ -362,17 +441,22 @@ footer a {
 @media (max-width: 1200px) {
   .book-page.active-page {
     width: 100%;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .book-segment {
     display: inline;
     width: 90%;
-    animation: none;
+    -webkit-animation: none;
+            animation: none;
     margin: 2rem auto;
   }
   .book-segment.active-book-segment {
     width: 90%;
-    animation: none;
+    -webkit-animation: none;
+            animation: none;
   }
   .book-segment.active-book-segment .book-inner {
     overflow: visible;
@@ -383,8 +467,12 @@ footer a {
     font-size: 1rem;
   }
   .book-segment .book-inner {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -393,10 +481,12 @@ footer a {
     font-size: 1.2rem;
   }
   .switch-left-button {
-    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
   }
   .switch-right-button {
-    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
   }
   .book-details-content {
     margin: 5% auto;
@@ -427,7 +517,10 @@ footer a {
 @media (max-width: 700px) {
   .book-details-content {
     width: 75%;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     margin: 5% auto;
     padding: 0.2rem 1.2rem;
   }
@@ -481,3 +574,4 @@ footer a {
     padding: 0.24rem;
   }
 }
+/*# sourceMappingURL=style.css.map */

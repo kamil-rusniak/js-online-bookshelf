@@ -10,8 +10,8 @@ class UI {
         <div class="book-info">
           <p class="book-title">${book.title}</p>
           <p class="book-author">${book.author}</p>
-          <p class="book-publisher invisible">${book.publisher}</p>
-          <p class="book-isbn invisible">${book.isbn}</p>
+          <p class="book-publisher hidden">${book.publisher}</p>
+          <p class="book-isbn hidden">${book.isbn}</p>
         </div>
       </div>
       <div class="book-buttons">
