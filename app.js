@@ -24,12 +24,12 @@ document.getElementById('add-button').addEventListener('click', function () {
   // Validation
   if (title === '' || author === '') {
     alert.innerText = "Title and Author fields can't be empty";
-    alert.classList.remove('invisible');
+    alert.classList.remove('hidden');
     setTimeout(function () {
-      alert.classList.add('invisible');
+      alert.classList.add('hidden');
     }, 5000);
   } else {
-    alert.classList.add('invisible');
+    alert.classList.add('hidden');
     UI.clearFields();
     UI.addBookToList(book, '.to-read-list');
     Storage.addBookToLS(book);
@@ -66,9 +66,9 @@ document.getElementById('search-icon').addEventListener('click', function () {
       .catch((err) => {
         console.log(err);
         alert.innerText = 'Please enter a valid ISBN number';
-        alert.classList.remove('invisible');
+        alert.classList.remove('hidden');
         setTimeout(function () {
-          alert.classList.add('invisible');
+          alert.classList.add('hidden');
         }, 5000);
       });
   }
@@ -82,7 +82,7 @@ document.getElementById('search-icon').addEventListener('click', function () {
 
     const book = new Book(title, author, publisher, isbn, section);
 
-    alert.classList.add('invisible');
+    alert.classList.add('hidden');
     UI.clearFields();
     UI.addBookToList(book, '.to-read-list');
     Storage.addBookToLS(book);

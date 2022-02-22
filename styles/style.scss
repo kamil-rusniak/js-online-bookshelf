@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mate+SC&family=Roboto:wght@100;300;400;500;700&display=swap");
 
-$orange-color: #ff9463;
-$purple-color: #3f3d56;
+$orange: #ff9463;
+$purple: #3f3d56;
 
 html {
   box-sizing: border-box;
@@ -18,7 +18,7 @@ html {
 }
 
 .orange {
-  color: $orange-color;
+  color: $orange;
 }
 
 body {
@@ -31,7 +31,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   height: 100%;
   min-height: 100%;
 }
@@ -50,7 +49,7 @@ body {
   font-size: 2rem;
 }
 
-.invisible {
+.hidden {
   display: none;
 }
 
@@ -82,7 +81,7 @@ nav {
 }
 
 .active-btn {
-  background-color: $orange-color;
+  background-color: $orange;
 }
 
 .main-page {
@@ -122,7 +121,7 @@ nav {
     }
 
     .search-icon {
-      background-color: $purple-color;
+      background-color: $purple;
       color: #fff;
       cursor: pointer;
       padding: 0.75rem;
@@ -134,7 +133,7 @@ nav {
 }
 
 #add-button {
-  background-color: $purple-color;
+  background-color: $purple;
   color: #fff;
   margin: 2rem auto;
 }
@@ -193,8 +192,8 @@ nav {
     }
 
     h2 {
-      color: $orange-color;
-      border-bottom: 3px solid $orange-color;
+      color: $orange;
+      border-bottom: 3px solid $orange;
     }
 
     .book-buttons {
@@ -326,7 +325,7 @@ footer {
   bottom: 0;
   a {
     text-decoration: none;
-    color: $orange-color;
+    color: $orange;
     margin: 0 1rem;
   }
 }
